@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Selecciona un Ticker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        select { padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Selecciona un Ticker</h1>
+    <select name="ticker">
+        {% for ticker in tickers %}
+            <option value="{{ ticker }}">{{ ticker }}</option>
+        {% endfor %}
+    </select>
+</body>
+</html>

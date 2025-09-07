@@ -1,0 +1,28 @@
+gcloud services enable cloudfunctions.googleapis.com --project=powerful-layout-463713-a8
+gcloud services enable eventarc.googleapis.com --project=powerful-layout-463713-a8
+gcloud services enable cloudbuild.googleapis.com --project=powerful-layout-463713-a8
+gcloud services enable run.googleapis.com --project=powerful-layout-463713-a8
+
+
+mkdir cloudfunctions
+cd cloudfunctions
+echo 'def upload_data(request): return "Hola Mundo!!!!", 200' > main.py
+echo 'google-cloud-bigquery' > requirements.txt
+
+
+gcloud functions deploy storage-to-bigquery \
+  --runtime python312 \
+  --trigger-http \
+  --allow-unauthenticated \
+  --service-account storage-to-bigquery@powerful-layout-463713-a8.iam.gserviceaccount.com \
+  --build-service-account=projects/powerful-layout-463713-a8/serviceAccounts/storage-to-bigquery@powerful-layout-463713-a8.iam.gserviceaccount.com \
+  --entry-point upload_data \
+  --region southamerica-east1 \
+  --memory 256MB \
+  --timeout 60s
+
+
+gcloud services disable cloudfunctions.googleapis.com --project=powerful-layout-463713-a8
+gcloud services disable eventarc.googleapis.com --project=powerful-layout-463713-a8
+gcloud services disable cloudbuild.googleapis.com --project=powerful-layout-463713-a8
+gcloud services disable run.googleapis.com --project=powerful-layout-463713-a8

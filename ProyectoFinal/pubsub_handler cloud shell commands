@@ -1,0 +1,17 @@
+mkdir pubsub_function
+cd pubsub_function
+echo 'def pubsub_handler(event, context): return "Hola Mundo!!!!", 200' > main.py
+echo "pandas" > requirements.txt
+
+
+gcloud functions deploy pubsub_handler \
+  --runtime python310 \
+  --trigger-topic datosproveedor \
+  --allow-unauthenticated \
+  --service-account simulator-storage-pubsub@gcp-final-project-2025.iam.gserviceaccount.com \
+  --build-service-account=projects/gcp-final-project-2025/serviceAccounts/simulator-storage-pubsub@gcp-final-project-2025.iam.gserviceaccount.com \
+  --entry-point pubsub_handler \
+  --region southamerica-east1 \
+  --memory 256MB \
+  --timeout 60s \
+  --project gcp-final-project-2025

@@ -1,0 +1,17 @@
+gcloud app create --region=southamerica-east1
+
+mkdir AppEnginePublisher
+cd AppEnginePublisher
+
+nano main.py
+rano requirements.txt
+nano app.yaml
+
+
+gcloud app deploy app.yaml
+
+
+
+gcloud app browse
+gcloud app logs tail -s default
+
